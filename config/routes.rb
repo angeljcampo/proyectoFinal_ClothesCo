@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'cart/index'
-  get 'cart/update'
-  get 'cart/destroy'
-  devise_for :users
   root 'products#index'
+    devise_for :users, controllers: {
+      sessions: 'users/sessions'
+    }
+
+  resources :orders
   resources :products
   resources :subcategories
   resources :categories
