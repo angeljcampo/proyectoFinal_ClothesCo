@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :payments
   root 'products#index'
     devise_for :users, controllers: {
       sessions: 'users/sessions'
     }
-
+  
   resources :orders
   resources :products
   resources :subcategories
