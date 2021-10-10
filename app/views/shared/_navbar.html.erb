@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand logo" href="<%= root_path %>">Clothes&Co</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mr-3">
+        <% if user_signed_in? %>
+            <li class="nav-item active">
+                <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "btn btn-sm btn-danger text-light" %> 
+                <%# <%= link_to 'Editar perfil', edit_user_registration_path, class: "btn btn-sm btn-success text-light mr-2 " %> 
+                <% if current_user.admin == true  %>
+                  <%= link_to 'Panel Admin', new_admin_user_session_path, class: "btn btn-sm btn-success text-light mr-2 " %>  
+                <% end %>
+                
+            </li>
+        <% else %>
+            <li class="nav-item active">
+                <%= link_to 'Iniciar sesión', new_user_session_path, class: "btn btn-sm btn-success text-light mr-2 " %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Registrarme', new_user_registration_path, class: "btn btn-sm text-danger btn-light " %>
+            </li>
+        <% end %>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

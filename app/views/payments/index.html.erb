@@ -16,9 +16,11 @@
       <tr>
         <td><%= payment.order %></td>
         <td><%= payment.method %></td>
-        <td><%= link_to 'Show', payment %></td>
-        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-        <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.present? == true && current_user.admin == true %>
+          <td><%= link_to 'Show', payment %></td>
+          <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
+          <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

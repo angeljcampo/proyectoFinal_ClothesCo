@@ -30,5 +30,8 @@
   <%= @product.subcategory %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<% if current_user.present? == true && current_user.admin == true %>
+  <%= link_to 'Edit', edit_product_path(@product) %> 
+<% end %>
+
 <%= link_to 'Back', products_path %>

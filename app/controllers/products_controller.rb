@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
-  before_action :set_product, only: %i[ show edit update destroy ]
+
+  before_action :set_product, :authenticate_user!, only: %i[ show]
+  before_action :authenticate_admin_user!, only: %i[ new create edit update destroy ]
 
   # GET /products or /products.json
   def index

@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
+<% if current_user.present? %> 
+<h1>Bienvenido  <%= current_user.name %></h1>
+<div id="edit-profile">
+<%= link_to "Editar perfil", edit_user_registration_path, remote: true, method: 'POST' %></div>
+<% end %>
 
 <table>
   <thead>
@@ -23,15 +27,21 @@
         <td><%= product.description %></td>
         <td><%= product.price %></td>
         <td><%= product.stock %></td>
-        <td><%= product.subcategory %></td>
+        <td><%= product.subcategory.to_s %></td>
+      <% if current_user.present? == true && current_user.admin == true %>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Product', new_product_path %>
+<% if current_user.present? == true && current_user.admin == true %>
+  <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
+  
+  <% end %>
+  
