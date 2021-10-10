@@ -3,7 +3,7 @@
 <% if current_user.present? %> 
 <h1>Bienvenido  <%= current_user.name %></h1>
 <div id="edit-profile">
-<%= link_to "Editar perfil", edit_user_registration_path, remote: true, method: 'POST' %></div>
+<%= link_to "Editar perfil", edit_user_registration_path %></div>
 <% end %>
 
 <table>
