@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
 
-  before_action :set_product, :authenticate_user!, only: %i[ show]
+  before_action :set_product, :authenticate_user!, only: %i[ show edit update destroy]
   before_action :authenticate_admin_user!, only: %i[ new create edit update destroy ]
 
   # GET /products or /products.json
   def index
     @products = Product.all
+    if current_user
+      @order = Order.find_by(user_id: current_user.id)
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -15,16 +18,18 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @categories = Category.all
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
-
+    @categories = Category.all
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -38,6 +43,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    @categories = Category.all
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: "Product was successfully updated." }
@@ -66,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :image, :description, :price, :stock, :subcategory_id)
+      params.require(:product).permit(:name, :image, :description, :price, :gender, :stock, :category_id)
     end
 end

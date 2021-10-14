@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
   has_many :orders, dependent: :destroy
   validates :name, :lastname, :email, :rut, :phone, :address, presence: true
+  
+  
   def to_s
     name
   end

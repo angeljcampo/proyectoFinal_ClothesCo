@@ -1,21 +1,16 @@
 class CartsController < ApplicationController
 before_action :authenticate_user!
 
-    def create
-        cart = current_order.cart.new(product_id: params[:product_id])
-        if cart.save
-            redirect_to root_path, notice: "Has añadido un articulo al carro de compras"
-          else
-           redirect_to product_path(params[:product_id]), alert: "Error al agregar al carrito"
-          end
-        end
+    def update
+        product = params[:cart][:product_id]
+        quantity = params[:cart][:quantity]
+        
+        current_order.add_product(product, quantity)
+        redirect_to root_url, notice: "Has agregado el producto al carrito de compras"
     end
 
-    private
-
-    def current_order
-        order = Order.where(user_id: current_user.id, status: 0).order(updated_at: :desc).first
-        Order.create(user_id: current_user.id) unless order
+    def show
+        @order = current_order
     end
 
 end

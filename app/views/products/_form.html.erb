@@ -17,8 +17,13 @@
   </div>
 
   <div class="field">
+    <%= form.label :gender %>
+    <%= form.select :gender, Product.genders.keys %>
+  </div>
+
+  <div class="field">
     <%= form.label :image %>
-    <%= form.text_field :image %>
+    <%= form.url_field :image %>
   </div>
 
   <div class="field">
@@ -37,8 +42,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :subcategory_id %>
-    <%= form.text_field :subcategory_id %>
+    <%= form.label :category_id %>
+    <%= form.select(:category_id, options_from_collection_for_select(@categories, :id, :name))  %>
   </div>
 
   <div class="actions">

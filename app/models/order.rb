@@ -5,4 +5,18 @@ class Order < ApplicationRecord
   has_many :products, through: :carts
 
   enum status: [:creado, :cancelado, :pagado, :completado]
+
+  def add_product(product_id, quantity)
+    product = Product.find(product_id)
+    if product && (product.stock > 0)
+      carts.create(product_id: product.id, quantity: quantity,
+      price: product.price )
+    end
+  end
+
+  def paid_order?
+    status == 2
+  end
+
+
 end

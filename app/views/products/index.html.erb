@@ -6,40 +6,40 @@
 <%= link_to "Editar perfil", edit_user_registration_path %></div>
 <% end %>
 
+<% if current_user.present? == true && current_user.admin == true %>
+  <%= link_to 'Ver carrito', cart_path(@order), class: "btn btn-success " %>
+  <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
+  <% end %>
   
     <% @products.each do |product| %>
    
-      <div class="card-deck">
-        <div class="card">
-          <img src="<%= product.image %>" class="card-img-top" alt="...">
+      <div class="card-group">
+        <div class="card " style="width: 18rem;">
+          <img src="<%= product.image %>" class="card-img-top img-responsive" alt="...">
           <div class="card-body">
-            <h5 class="card-title"><%= product.name %></h5>
+            <h5 class="card-title"><%= product.name %><%= product.price %></h5>
             <p class="card-text"><%= product.description %></p>
-            <p class="card-text"><%= product.price %></p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-      <% if current_user.present? == true && current_user.admin == true %>
-        <%= link_to 'Show', product %>
-        <%= link_to 'Edit', edit_product_path(product) %>
-        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
+            <p class="card-text">
+              <small>
+                <% if current_user %>
+                      <%= form_for :cart, url: cart_path(product), method: :put do |f| %>
+                        <%= f.hidden_field :product_id, value: product.id%>
+                        <%= f.hidden_field :quantity, value: 1 %>
+                        <%= f.submit "Add to cart", :class => "btn btn-primary"%> 
+                    <% end %>
+                  <% end %>
+              </small>
+            </p>
+                  
+                  <% if current_user.present? == true && current_user.admin == true %>
+                    <p class="card-text h3">Stock: <%= product.stock %></p>
+                    <%= link_to 'Show', product, class: "btn btn-success" %>
+                    <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
+                    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                <% end %>
+         </div>
+      </div>
     <% end %>
- 
-
-
-
-
-
-
-
-
-
-
 
 <br>
-<% if current_user.present? == true && current_user.admin == true %>
-  <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
-  
-  <% end %>
   

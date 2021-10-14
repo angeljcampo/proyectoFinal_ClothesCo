@@ -7,10 +7,9 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
-  resources :carts, only: [:create]
+  resources :carts, only: [:show, :update]
   resources :orders
   resources :products
-  resources :subcategories
   resources :categories
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
