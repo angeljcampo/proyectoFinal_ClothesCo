@@ -30,7 +30,9 @@
                     </div>
                     <div class="col-xs-4 col-md-4">
                         <%= item.quantity %>
+                        <%= link_to "borrar", cart_path(item), method: :delete, data: { confirm: 'Estas seguro que deseas eliminar este producto de tu carro de compras?' }%>
                     </div>
+                    
                     <div class="col-xs-2 col-md-2"></div>
                 </div>
             </div>
