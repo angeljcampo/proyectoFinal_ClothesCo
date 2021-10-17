@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_032948) do
+ActiveRecord::Schema.define(version: 2021_10_17_190941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 2021_10_14_032948) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "average_caches", force: :cascade do |t|
+    t.bigint "rater_id"
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.float "avg", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_average_caches_on_rateable_type_and_rateable_id"
+    t.index ["rater_id"], name: "index_average_caches_on_rater_id"
+  end
+
   create_table "carts", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
@@ -67,6 +78,15 @@ ActiveRecord::Schema.define(version: 2021_10_14_032948) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "overall_averages", force: :cascade do |t|
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.float "overall_avg", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_overall_averages_on_rateable_type_and_rateable_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.bigint "order_id"
     t.integer "method"
@@ -86,6 +106,18 @@ ActiveRecord::Schema.define(version: 2021_10_14_032948) do
     t.boolean "gender"
     t.bigint "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.string "cacheable_type"
+    t.bigint "cacheable_id"
+    t.float "avg", null: false
+    t.integer "qty", null: false
+    t.string "dimension"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
+    t.index ["cacheable_type", "cacheable_id"], name: "index_rating_caches_on_cacheable_type_and_cacheable_id"
   end
 
   create_table "users", force: :cascade do |t|

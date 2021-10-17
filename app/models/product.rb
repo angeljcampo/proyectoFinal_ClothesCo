@@ -4,4 +4,5 @@ class Product < ApplicationRecord
   has_many :orders, through: :carts
   enum gender: [:hombre, :mujer, :niño]
   
+  ratyrate_rateable "calidad"
 end

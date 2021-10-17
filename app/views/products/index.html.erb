@@ -7,7 +7,6 @@
 <% end %>
 
 <% if current_user.present? == true && current_user.admin == true %>
-  <%= link_to 'Ver carrito', cart_path(@order), class: "btn btn-success " %>
   <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
   <% end %>
   

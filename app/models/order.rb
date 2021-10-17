@@ -16,7 +16,6 @@ class Order < ApplicationRecord
 
   def paid_order?
     status == 2
-  end
-
+  end   
 
 end

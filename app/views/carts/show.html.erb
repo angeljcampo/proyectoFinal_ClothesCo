@@ -1,13 +1,13 @@
 <div class="card mt-5">
     <div class="card-header bg-dark text-light">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        <a href="<%= root_url%>" class="btn btn-outline-info btn-sm
-        pull-right">Continue Shopping</a>
+        
+        <a href="<%= root_url%>" class="btn btn-outline-light btn-sm
+        pull-right">Continua con tus compras</a>
     <div class="clearfix">
     </div>
 </div>
     <div class="card-body">
-        <% @order.carts.includes(:product).each do |item| %>
+        <% @order.carts.includes(:product).map do |item| %>
             <div class="row">
                 <div class="col-xs-2 col-md-2">
                     <img class="img-responsive img-fluid"src="<%= item.product.image%>" alt="prewiew">

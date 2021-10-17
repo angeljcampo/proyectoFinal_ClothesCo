@@ -9,11 +9,11 @@
         <% if user_signed_in? %>
             <li class="nav-item active">
                 <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "btn btn-sm btn-danger text-light" %> 
-                <%# <%= link_to 'Editar perfil', edit_user_registration_path, class: "btn btn-sm btn-success text-light mr-2 " %> 
+                <%= link_to 'Editar perfil', edit_user_registration_path, class: "btn btn-sm btn-success text-light mr-2" %>
+                
                 <% if current_user.admin == true  %>
                   <%= link_to 'Panel Admin', new_admin_user_session_path, class: "btn btn-sm btn-success text-light mr-2 " %>  
                 <% end %>
-                
             </li>
         <% else %>
             <li class="nav-item active">
@@ -28,5 +28,10 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <% if current_user && @order.present? %>
+          <%= link_to (cart_path(@order)) do %>
+                      <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>
+                <% end %>
+        <% end %>
     </div>
 </nav>
