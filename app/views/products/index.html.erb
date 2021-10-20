@@ -1,44 +1,41 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.present? %> 
-<h1>Bienvenido  <%= current_user.name %></h1>
-<div id="edit-profile">
-<%= link_to "Editar perfil", edit_user_registration_path %></div>
+  <h1>Bienvenido  <%= current_user.name %></h1>
 <% end %>
+   
 
 <% if current_user.present? == true && current_user.admin == true %>
-  <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
-  <% end %>
+    <%= link_to 'New Product', new_product_path, class: "btn btn-success " %>
   
-    <% @products.each do |product| %>
-   
-      <div class="card-group">
-        <div class="card " style="width: 18rem;">
-          <img src="<%= product.image %>" class="card-img-top img-responsive" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><%= product.name %><%= product.price %></h5>
-            <p class="card-text"><%= product.description %></p>
-            <p class="card-text">
-              <small>
-                <% if current_user %>
-                      <%= form_for :cart, url: cart_path(product), method: :put do |f| %>
-                        <%= f.hidden_field :product_id, value: product.id%>
-                        <%= f.hidden_field :quantity, value: 1 %>
-                        <%= f.submit "Add to cart", :class => "btn btn-primary"%> 
-                    <% end %>
-                  <% end %>
-              </small>
-            </p>
-                  
-                  <% if current_user.present? == true && current_user.admin == true %>
-                    <p class="card-text h3">Stock: <%= product.stock %></p>
-                    <%= link_to 'Show', product, class: "btn btn-success" %>
-                    <%= link_to 'Edit', edit_product_path(product), class: "btn btn-info" %>
-                    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                <% end %>
-         </div>
-      </div>
-    <% end %>
+<% end %>
 
-<br>
-  
+<div class="card-deck mt-3">
+    <div class="row">
+        <% @products.each do |product| %>
+            <div class="card">
+                <%= link_to (product_path(product)) do %>
+                  <%= image_tag product.image, class: "img-fluid" %>
+                <% end %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= product.name %></h5>
+                    <p class="card-text"><%= product.description %></p>
+                    <p class="card-text"><%= product.price %></p>
+                    <% if user_signed_in? %>
+                        <%= form_for :cart, url: cart_path(product), method: :put do |f| %>
+                        <%= f.hidden_field :product_id, value: product.id %>
+                        <%= f.hidden_field :quantity, value: 1 %>
+                        <%= f.submit "Add to cart" %>
+                        <% end %>  
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-md-8 offset-md-2 mx-2 my-5 ">
+      <%= paginate @products, class:'btn btn-danger mx-2'  %>
+    </div>
+</div>

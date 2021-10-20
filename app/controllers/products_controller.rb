@@ -5,10 +5,15 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    if params[:q]
+      @products = @q.result(distinct: true)
+    else
+      @products = Product.all
+    end
     if current_user
       @order = Order.find_by(user_id: current_user.id)
     end
+    @products = Kaminari.paginate_array(@products).page(params[:page]).per(3)
   end
 
   # GET /products/1 or /products/1.json
@@ -65,6 +70,7 @@ class ProductsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])

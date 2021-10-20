@@ -24,10 +24,13 @@
             </li>
         <% end %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= search_form_for @q do |f| %>
+            <%= f.label :name_cont %>
+            <%= f.search_field :name_cont %>
+            <%= f.submit %>
+        <% end %>
+        
+        
         <% if current_user && @order.present? %>
           <%= link_to (cart_path(@order)) do %>
                       <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>

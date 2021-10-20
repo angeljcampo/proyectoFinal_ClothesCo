@@ -16,6 +16,15 @@ class Order < ApplicationRecord
 
   def paid_order?
     status == 2
-  end   
+  end
+
+  def total_order
+    total = 0
+    self.carts.map do |i|
+      total += i.price 
+    end
+    total
+  end
+
 
 end
