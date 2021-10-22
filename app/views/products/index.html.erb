@@ -1,8 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user.present? %> 
-  <h1>Bienvenido  <%= current_user.name %></h1>
-<% end %>
    
 
 <% if current_user.present? == true && current_user.admin == true %>
