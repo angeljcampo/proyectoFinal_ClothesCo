@@ -18,6 +18,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'faker'
 ###### Gema para rating ########
 gem 'ratyrate'
+
+##### Gema para inciar sesion con Facebook ########
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'jquery-rails'
 ###### Gema para paginacion ########
 gem 'kaminari'
@@ -47,6 +52,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
 end
 
 group :development do
