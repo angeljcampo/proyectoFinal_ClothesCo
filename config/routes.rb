@@ -8,8 +8,14 @@ Rails.application.routes.draw do
   }
   root 'products#index'
 
+  resources :carts, only: [:show, :update, :destroy] do
+    member do
+      post :pay_with_paypal
+      get :process_paypal_payment
+    end
+  end
+  
   resources :payments
-  resources :carts, only: [:show, :update, :destroy]
   resources :orders
   resources :products
   resources :categories

@@ -18,7 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'faker'
 ###### Gema para rating ########
 gem 'ratyrate'
-
+### Gema que complementa Paypal ###
+gem 'activemerchant'
 ##### Gema para inciar sesion con Facebook ########
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
