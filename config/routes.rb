@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stats/my_stats'
+  get 'home/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  root 'products#index'
+  root 'home#index'
 
   resources :carts, only: [:show, :update, :destroy] do
     member do
@@ -20,6 +22,6 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   post '/rate' => 'rater#create', :as => 'rate'
-  
+  get 'my_stats', to: "stats#my_stats"
 end
 

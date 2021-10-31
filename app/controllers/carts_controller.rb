@@ -7,7 +7,7 @@ before_action :set_cart, only: [:destroy]
     quantity = params[:cart][:quantity]
 
     current_order.add_product(product, quantity)
-    redirect_to root_url, notice: "Has agregado el producto al carrito de compras"
+    redirect_to products_url, notice: "Has agregado el producto al carrito de compras"
   end
 
   def show
@@ -15,11 +15,13 @@ before_action :set_cart, only: [:destroy]
   end
 
   def destroy
+    @cart.order.total = @cart.update_order
     @cart.destroy
       respond_to do |format|
         format.html { redirect_to cart_url, notice: "Your cart is now updated." }
         format.json { head :no_content }
       end
+      
   end
 
   def pay_with_paypal

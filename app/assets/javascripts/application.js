@@ -18,3 +18,5 @@
 //= require_tree .
 //= require jquery.raty
 //= require ratyrate
+//= require chartkick
+//= require Chart.bundle

@@ -20,6 +20,10 @@ gem 'faker'
 gem 'ratyrate'
 ### Gema que complementa Paypal ###
 gem 'activemerchant'
+### Gema para crear graficos #####
+gem "chartkick"
+### Gema para agrupar por fechas #####
+gem 'groupdate'
 ##### Gema para inciar sesion con Facebook ########
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

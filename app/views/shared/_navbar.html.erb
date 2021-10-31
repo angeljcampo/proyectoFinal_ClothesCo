@@ -1,46 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand logo" href="<%= root_path %>">Clothes&Co</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mr-5">
-        <% if user_signed_in? %>
-            <li class="nav-item active">
-              <span class = "mb-4  p-2 text-light h4 welcome">Bienvenid@  <%= current_user.name %></span>
-            </li>
-            <li class="nav-item active">
-                <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "btn btn-sm btn-danger text-light" %> 
-                <%= link_to 'Editar perfil', edit_user_registration_path, class: "btn btn-sm btn-success text-light mr-2" %>
+            <a class="navbar-brand logo" href="<%= root_path %>">Clothes&Co</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <ul class="navbar-nav ml-auto mr-8">
+
+            <div>
+                <%= search_form_for @q, :html => {:class => "form-inline my-2 my-lg-0 "} do |f| %>
+                    <%= f.search_field :name_cont, class: "form-control mr-sm-2 ", type:"search", placeholder:"Search" %>
+                <% end %>
                 
-                <% if current_user.admin == true  %>
-                  <%= link_to 'Panel Admin', new_admin_user_session_path, class: "btn btn-sm btn-success text-light mr-2 " %>  
+                <% if current_user && @order.present? %>
+                <%= link_to (cart_path(@order)) do %>
+                            <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>
+                        <% end %>
                 <% end %>
-            </li>
-        <% else %>
-            <li class="nav-item active">
-                <%= link_to 'Iniciar sesión', new_user_session_path, class: "btn btn-sm btn-success text-light mr-2 " %>
-            </li>
-            <li class="nav-item">
-                <%= link_to 'Registrarme', new_user_registration_path, class: "btn btn-sm text-danger btn-light mr-2 " %>
-            </li>
-             <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
-            <li class="nav-item">
-                <%# <%= link_to 'Sig in with Facebook', user_facebook_omniauth_authorize_path, method: :post, class: "btn btn-sm text-danger btn-light " %> %>
-            </li>
-        <% end %>
+            </div>
+            <div class="dropdown ml-auto ">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                <% if current_user %>
+                    Bienvenid@ <%= current_user.name %>
+                <% else %>
+                    Ingresar
+                <% end %>
+                </button>
+                <div class="dropdown-menu mr-3" aria-labelledby="dropdownMenuButton">
+                    <%= link_to "Ver productos", products_path, class: "dropdown-item" %>
+                    <% if user_signed_in? %>
+                        <% if current_user.admin == true  %>
+                        <%= link_to 'Crear producto', new_product_path, class: "dropdown-item " %> 
+                        <%= link_to 'Panel Admin', new_admin_user_session_path, class: "dropdown-item " %>
+                        <%= link_to 'Estadtísticas', my_stats_path, class: "dropdown-item " %>
+                        <% end %>
+                        <%= link_to 'Editar perfil', edit_user_registration_path, class: "dropdown-item" %>
+                        <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "dropdown-item" %> 
+                <% else %>
+                        <%= link_to 'Iniciar sesión', new_user_session_path, class: "dropdown-item " %>
+                        <%= link_to 'Registrarme', new_user_registration_path, class: "dropdown-item " %>
+                <% end %>
+                </div>
+                
+            </div>
         </ul>
-      
-        <%= search_form_for @q do |f| %>
-            <%= f.search_field :name_cont, class: "form-control mr-sm-2", type:"search", placeholder:"Search" %>
-        <% end %>
-        
-        <% if current_user && @order.present? %>
-          <%= link_to (cart_path(@order)) do %>
-                      <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>
-                <% end %>
-        <% end %>
-        
     </div>
 </nav>

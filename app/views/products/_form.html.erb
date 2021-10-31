@@ -1,52 +1,53 @@
-<%= form_with(model: product, local: true) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+  
+  <%= form_with(model: product, local: true) do |form| %>
+    <% if product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :gender %>
+      <%= form.select :gender, Product.genders.keys %>
+    </div>
+
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.url_field :image %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.number_field :price %>
+    </div>
+
+    <div class="field">
+      <%= form.label :stock %>
+      <%= form.number_field :stock %>
+    </div>
+
+    <div class="field mb-4">
+      <%= form.label :category_id %>
+      <%= form.select(:category_id, options_from_collection_for_select(@categories, :id, :name))  %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.select :gender, Product.genders.keys %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.url_field :image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :stock %>
-    <%= form.number_field :stock %>
-  </div>
-
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.select(:category_id, options_from_collection_for_select(@categories, :id, :name))  %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
