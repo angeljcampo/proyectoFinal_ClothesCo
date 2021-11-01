@@ -38,7 +38,7 @@ before_action :set_cart, only: [:destroy]
     total: order.total,
     token: response.token
     )
-    Rails.logger.info "*** #{response.inspect}"
+    
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
