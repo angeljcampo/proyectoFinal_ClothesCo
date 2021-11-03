@@ -6,16 +6,16 @@
             </button>
         <ul class="navbar-nav ml-auto mr-8">
 
+            <div>
+                <% if current_user && @order.present? %>
                 <%= link_to (cart_path(@order)) do %>
                             <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>
                         <% end %>
-            <div>
+                <% end %>
                 <%= search_form_for @q, :html => {:class => "form-inline my-2 my-lg-0 "} do |f| %>
                     <%= f.search_field :name_cont, class: "form-control mr-sm-2 ", type:"search", placeholder:"Search" %>
                 <% end %>
                 
-                <% if current_user && @order.present? %>
-                <% end %>
             </div>
             <div class="dropdown ml-auto ">
                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
