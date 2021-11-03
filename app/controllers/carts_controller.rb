@@ -27,7 +27,7 @@ before_action :set_cart, only: [:destroy]
   def pay_with_paypal
     order = Order.find(params[:cart][:order_id])
     price = order.total
-    response = ::EXPRESS_GATEWAY.setup_purchase(price, ip: request.remote_ip,
+    response = EXPRESS_GATEWAY.setup_purchase(price, ip: request.remote_ip,
     return_url: process_paypal_payment_cart_url,
     cancel_return_url: root_url,
     allow_guest_checkout: true,
@@ -39,11 +39,11 @@ before_action :set_cart, only: [:destroy]
     token: response.token
     )
     
-    redirect_to ::EXPRESS_GATEWAY.redirect_url_for(response.token)
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
   def process_paypal_payment
-    details = ::EXPRESS_GATEWAY.details_for(params[:token])
+    details = EXPRESS_GATEWAY.details_for(params[:token])
     express_purchase_options =
     {
       ip: request.remote_ip, token: params[:token],
@@ -51,7 +51,7 @@ before_action :set_cart, only: [:destroy]
       currency: "USD"
     }
     price = details.params["order_total"].to_d
-    response = ::EXPRESS_GATEWAY.purchase(price, express_purchase_options)
+    response = EXPRESS_GATEWAY.purchase(price, express_purchase_options)
       if response.success?
         payment = Payment.find_by(token: response.token)
         order = payment.order
