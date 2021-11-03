@@ -24,15 +24,19 @@ gem 'activemerchant'
 gem "chartkick"
 ### Gema para agrupar por fechas #####
 gem 'groupdate'
+### Gema para ActiveStorage #####
+gem "image_processing", ">= 1.2"
 ##### Gema para inciar sesion con Facebook ########
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'jquery-rails'
+gem 'figaro'
 ###### Gema para paginacion ########
 gem 'kaminari'
 ###### Gema para buscador ########
 gem 'ransack'
+gem 'sendgrid-ruby'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -79,3 +83,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "aws-sdk-s3", "~> 1.104"

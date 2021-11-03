@@ -51,7 +51,7 @@ before_action :set_cart, only: [:destroy]
       currency: "USD"
     }
     price = details.params["order_total"].to_d
-    response = EXPRESS_GATEWAY.purchase(price, express_purchase_options)
+    response = ::EXPRESS_GATEWAY.purchase(price, express_purchase_options)
       if response.success?
         payment = Payment.find_by(token: response.token)
         order = payment.order
