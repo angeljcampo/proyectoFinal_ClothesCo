@@ -11,9 +11,13 @@
     <div class="row">
         <% @products.each do |product| %>
             <div class="card">
-                <%= link_to (product_path(product)) do %>
-                  <%= image_tag product.image, class: "img-fluid" %>
+            <% if product.images.attached?  %>
+                <% link_to (product_path(product)) do %>
+                  <%= image_tag product.images.last.variant(resize: "100x100"), class: "img-fluid" %>
                 <% end %>
+            <% else %>
+                <%= link_to "ver producto", product_path(product) %>
+            <% end %>
                 <div class="card-body">
                     <h5 class="card-title"><%= product.name %></h5>
                     <p class="card-text"><%= product.description %></p>
