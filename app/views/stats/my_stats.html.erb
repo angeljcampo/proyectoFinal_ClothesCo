@@ -1,22 +1,39 @@
-<h1 class="text-center">Estadisticas mensuales</h1>
+<div class="container">   
+    <h1 class="text-center">Estadisticas mensuales</h1>
 
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-         <%= pie_chart @buyers %>
-      </div>
+    <div class="row">
+    <div class="col-sm-6">
+        <div class="card border-info mb-3">
+        <div class="card-body">
+            <h3 class="text-center"> Cantidad de compras semanales</h3>
+            <%= column_chart @weekly_buyers %>
+        </div>
+        </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+    <div class="col-sm-6">
+        <div class="card border-info mb-3">
+        <div class="card-body">
+            <h3 class="text-center"> Cantidad de usuarios registrados semanales</h3>
+            <%= column_chart @weekly_users %>
+        </div>
+        </div>
     </div>
-  </div>
-</div>
-
-       
+    <div class="col-sm-6">
+        <div class="card">
+        <div class="card-body">
+            <h3 class="text-center"> Cantidad de compras al dia de hoy</h3>
+            <%= column_chart @diary_buyers %>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+        <div class="card-body">
+            <h3 class="text-center"> Cantidad de usuarios registrados al dia de hoy</h3>
+            <%= column_chart @diary_users %>
+        </div>
+        </div>
+    </div>
+    </div>
+ </div>
+        

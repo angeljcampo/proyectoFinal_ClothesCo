@@ -1,36 +1,28 @@
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="card border-info mb-3">
+        <div class="card-body">
+            <h2 class="text-center">  <%= @product.name %></h3>
+            <p class="text-center h3"><%= @product.price %></p><hr>
+            <div class="text-center">
+              <img src="<%= @product.image %>" class= "img-responsive">
+            </div>
+            <h2 class="text-center">Descripción</h2>
+            <p class= "text-center"><%= @product.description %></p>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="text-center mb-3">
+  <p>
+    Calidad: <%= rating_for @product, 'calidad', star: 5 %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+  <% if current_user.present? == true && current_user.admin == true %>
+    <%= link_to 'Edit', edit_product_path(@product),:class => 'btn btn-primary' %> 
+  <% end %>
 
-<p>
-  <strong>Image:</strong>
-  <%= @product.image %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  Calidad: <%= rating_for @product, 'calidad', star: 5 %>
-</p>
-
-<p>
-  <strong>Subcategory:</strong>
-  <%= @product.category %>
-</p>
-
-<% if current_user.present? == true && current_user.admin == true %>
-  <%= link_to 'Edit', edit_product_path(@product) %> 
-<% end %>
-
-<%= link_to 'Back', products_path %>
+  <%= link_to 'Back', products_path, :class => 'btn btn-primary'%>
+</div>
