@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable,
   :omniauthable, omniauth_providers: %i[github google_oauth2 ]
-  validates :name, :lastname, :email, :rut, :address, presence: true
+  validates :name, :lastname, :email, :address, presence: true
   
   ratyrate_rater
   

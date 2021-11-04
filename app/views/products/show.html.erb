@@ -7,7 +7,7 @@
             <h2 class="text-center">  <%= @product.name %></h3>
             <p class="text-center h3"><%= @product.price %></p><hr>
             <div class="text-center">
-              <img src="<%= @product.images.last.variant(resize: "100x100") %>" class= "img-responsive">
+              <%= image_tag @product.images.last %>
             </div>
             <h2 class="text-center">Descripción</h2>
             <p class= "text-center"><%= @product.description %></p>
