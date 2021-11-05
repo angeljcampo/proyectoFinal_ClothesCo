@@ -60,6 +60,7 @@ before_action :set_cart, only: [:destroy]
           ActiveRecord::Base.transaction do
             order.save!
             payment.save!
+            UserNotifierMailer.send_signup_email(order.user, order).deliver
           end
         redirect_to root_path, notice: 'Compra exitosa'
       else

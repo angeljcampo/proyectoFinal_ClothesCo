@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+
+        <h1>¡Gracias por tu compra!</h1>
+        <p>A continuación te mostraremos el detalle de tu compra:</p>
+
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <% @order.carts.includes(:product).map do |item| %>
+                        <td><%= item.product.name %></td>
+                        <td><%= item.product.description %></td>
+                        <td><%= item.quantity %></td>
+                        <td><%= item.price %></td>                 
+                    <% end %>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right">TOTAL:</td> 
+                    <td><%=@order.total %></td> 
+                </tr> 
+            </tbody>
+        </table>
+
+        <p>Si deseas hacer otra compra puedes entrar al www.clothesco.herokuapp.com.</p>
+  </body>
+</html>
