@@ -1,17 +1,21 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="navbar-brand logo" href="<%= root_path %>">Clothes&Co</a>
+             <%= link_to root_path do %>
+                    <%= image_tag "logo1.jpg", :size => "80x80" %>
+                    <span class="h1 text-light font-weight-bold pb-2"> CLOTHESCO</span>
+            <% end %>
+            <a class="navbar-brand logo" href="<%= root_path %>"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         <ul class="navbar-nav ml-auto mr-8">
 
-            <div>
                 <% if current_user && @order.present? %>
                 <%= link_to (cart_path(@order)) do %>
-                            <i class="fas fa-shopping-cart text-light fa-2x mx-2"></i>
+                            <i class="fas fa-shopping-cart text-light fa-3x mx-2"></i>
                         <% end %>
                 <% end %>
+            <div>
                 <%= search_form_for @q, :html => {:class => "form-inline my-2 my-lg-0 "} do |f| %>
                     <%= f.search_field :name_cont, class: "form-control mr-sm-2 ", type:"search", placeholder:"Search" %>
                 <% end %>
@@ -29,9 +33,12 @@
                     <%= link_to "Ver productos", products_path, class: "dropdown-item" %>
                     <% if user_signed_in? %>
                         <% if current_user.admin == true  %>
-                        <%= link_to 'Crear producto', new_product_path, class: "dropdown-item " %> 
-                        <%= link_to 'Panel Admin', new_admin_user_session_path, class: "dropdown-item " %>
-                        <%= link_to 'Estadtísticas', my_stats_path, class: "dropdown-item " %>
+                            <%= link_to 'Crear producto', new_product_path, class: "dropdown-item " %> 
+                            <%= link_to 'Panel Admin', new_admin_user_session_path, class: "dropdown-item " %>
+                            <%= link_to 'Manejar ordenes', orders_path, class: "dropdown-item " %>
+                            <%= link_to 'Estadtísticas', my_stats_path, class: "dropdown-item " %>
+                        <% else %>
+                            <%= link_to 'Mis ordenes', orders_path, class: "dropdown-item " %>
                         <% end %>
                         <%= link_to 'Editar perfil', edit_user_registration_path, class: "dropdown-item" %>
                         <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "dropdown-item" %> 

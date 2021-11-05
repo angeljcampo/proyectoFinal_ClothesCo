@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
     if current_user
       @order = Order.find_by(user_id: current_user.id)
     end
-    @products = Kaminari.paginate_array(@products).page(params[:page]).per(3)
+    @products = Kaminari.paginate_array(@products).page(params[:page]).per(4)
   end
 
   # GET /products/1 or /products/1.json
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     @categories = Category.all
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: "Product was successfully created." }
+        format.html { redirect_to @product, notice: "Tu producto ha sido creado con exito." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }

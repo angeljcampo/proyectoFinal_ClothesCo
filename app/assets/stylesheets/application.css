@@ -2463,6 +2463,11 @@ input, select, textarea {
 			object-position: 25% 75%;
 		}
 
+		.card-img-top {
+			width: 100%;
+			height: 15vw;
+			object-fit:cover;
+		}
 		.image.left, .image.right {
 			max-width: 40%;
 		}

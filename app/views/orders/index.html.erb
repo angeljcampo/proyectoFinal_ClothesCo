@@ -1,35 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container"> 
+  <p id="notice"><%= notice %></p>
 
-<h1>Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
+  <% if current_user.admin == true  %>
+    <h1 class="text-center">Totalidad de ordenes</h1>
+  <% else %>
+    <h1 class="text-center">Mis ordenes</h1>
+  <% end %>
+  
+  <table class="table border border-dark mb-5">
+    <thead>
       <tr>
-        <td><%= order.user %></td>
-        <td><%= order.total %></td>
-        <td><%= order.status %></td>
-        <% if current_user.admin == true %>
-          <td><%= link_to 'Show', order %></td>
-          <td><%= link_to 'Edit', edit_order_path(order) %></td>
-          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
-        <% end %>
-        
+        <th>Fecha</th>
+        <th>User</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th colspan="3" class="text-center">Acciones</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Order', new_order_path %>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.created_at.strftime('%d-%m-%Y') %></td>
+          <td><%= order.user.name %></td>
+          <td>$<%= order.total %></td>
+          <td><%= order.status %></td>
+          <% if current_user.admin == true %>
+            <td><%= link_to 'Show', order, class:"btn btn-primary" %></td>
+            <td><%= link_to 'Edit', edit_order_path(order), class:"btn btn-success" %></td>
+            <td><%= link_to 'Destroy', order, method: :delete, class:"btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+          
+          <% end %>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

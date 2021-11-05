@@ -1,28 +1,36 @@
-    <p id="notice"><%= notice %></p>
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-        <div class="card border-info mb-3">
-        <div class="card-body">
-            <h2 class="text-center">  <%= @product.name %></h3>
-            <p class="text-center h3"><%= @product.price %></p><hr>
-            <div class="text-center">
-              <%= image_tag @product.images.last.variant(resize: "100x100") %>
-            </div>
-            <h2 class="text-center">Descripción</h2>
-            <p class= "text-center"><%= @product.description %></p>
-        </div>
-        </div>
-    </div>
-</div>
-<div class="text-center mb-3">
-  <p>
-    Calidad: <%= rating_for @product, 'calidad', star: 5 %>
-  </p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+          <div class="card border-info mb-3">
+          <div class="card-body">
+              <h2 class="text-center h2">  <%= @product.name %></h3>
+              <p class="text-center h3">$<%= @product.price %></p><hr>
+              <div class="text-center">
+                <%= image_tag @product.images.last.variant(resize: "400x400") %>
+              </div>
+              <h2 class="text-center">Descripción del producto:</h2>
+              <p class= "text-center"><%= @product.description %></p>
+               <% if user_signed_in? %>
+                            <%= form_for :cart, url: cart_path(@product), method: :put do |f| %>
+                            <%= f.hidden_field :product_id, value: @product.id %>
+                            <%= f.hidden_field :quantity, value: 1 %>
+                            <%= f.submit "Add to cart" %>
+                            <% end %>  
+                  <% end %>
+          </div>
+          </div>
+      </div>
+  </div>
+  <div class="text-center mb-3 border border-info">
+    <span>
+      Calidad: <%= rating_for @product, 'calidad', star: 5 %>
+    </span>
 
-  <% if current_user.present? == true && current_user.admin == true %>
-    <%= link_to 'Edit', edit_product_path(@product),:class => 'btn btn-primary' %> 
-  <% end %>
-
-  <%= link_to 'Back', products_path, :class => 'btn btn-primary'%>
+    <% if current_user.present? == true && current_user.admin == true %>
+      <%= link_to 'Edit', edit_product_path(@product),:class => 'btn btn-primary mb-3' %> 
+    <% end %>
+    <%= link_to 'Back', products_path, :class => 'btn btn-primary mb-3'%>
+  </div>
 </div>
